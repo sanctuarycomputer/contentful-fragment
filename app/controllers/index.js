@@ -32,6 +32,10 @@ export default Controller.extend({
         });
         set(this.model, 'fragments', newFragments);
       }
+    },
+    save() {
+      console.log(this.model, 'save');
+      this.extension.field.setValue(this.model);
     }
   }
 });

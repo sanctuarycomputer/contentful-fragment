@@ -16,11 +16,17 @@ export default Controller.extend({
     },
     save() {
       // TODO: ensure all fields are valid before saving
-      const newValue = this.extension.field.getValue();
-      set(newValue, '_schema', this.model);
+      const newValue = this.extension.field.getValue() || {};
+      newValue._schema = this.model;
       this.extension.field.setValue(newValue).then(() => {
         this.transitionToRoute('index');  
       });
+    },
+    removeFragmentField(field) {
+      const newFields = this.model.reject(existingField => {
+        return existingField.uuid === field.uuid;
+      });
+      set(this, 'model', newFields);
     }
   }
 

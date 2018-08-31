@@ -1,3 +1,5 @@
+<h2>Fragments</h2>
+
 {{#if model._schema}}
   {{#each model.fragments as |fragment|}}
     {{#each fragment as |fragmentField|}}
@@ -5,7 +7,7 @@
         <div class='cf-form-field'>
           <label>
             {{fragmentField.key}}
-            {{input value=fragmentField.value class='cf-form-input'}}
+            {{input value=fragmentField.value class='cf-form-input' change="save"}}
           </label> 
         </div>
       {{/if}}
@@ -15,13 +17,16 @@
   {{else}}
     You haven't made any fragments, yet!
     <br />
+    <br />
   {{/each}}
   <button class='cf-btn-primary' {{action 'addFragment'}}>+ Add Fragment</button>
   {{#link-to 'schema'}}
     <button class='cf-btn-primary'>Edit Fragment Blueprint</button>
   {{/link-to}}
+  <hr />
+  <button class='cf-btn-primary' {{action 'save'}}>Save</button>
 {{else}}
-  <p>There is no Fragment Blueprint! Please setup your blueprint before adding content.</p>
+  <p>Please setup your Fragment Blueprint before adding content.</p>
   {{#link-to 'schema'}}
     <button class='cf-btn-primary'>Setup Fragment Blueprint</button>
   {{/link-to}}
