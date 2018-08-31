@@ -28,7 +28,10 @@ module.exports = {
       ],
       parserOptions: {
         sourceType: 'script',
-        ecmaVersion: 2015
+        ecmaVersion: 2015,
+        ecmaFeatures: {
+          experimentalObjectRestSpread: true
+        }
       },
       env: {
         browser: false,

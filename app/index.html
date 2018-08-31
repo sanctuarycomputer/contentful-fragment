@@ -20,6 +20,31 @@
   <body>
     {{content-for "body"}}
 
+    <script type="text/javascript">
+      window.contentfulFragment = {
+        _ready: false,
+        _extension: null,
+        _readyStack: [],
+        init: function(extension) {
+          window.contentfulFragment._extension = extension;
+          window.contentfulFragment._ready = true;
+          extension.window.startAutoResizer();
+          window.contentfulFragment._readyStack.forEach(function (callback) {
+            callback(window.contentfulFragment._extension);
+          });
+          console.log('Contentful Fragment: Did Initialize');
+        },
+        getExtension(callback) {
+          if (window.contentfulFragment._ready) {
+            callback(window.contentfulFragment._extension);
+          } else {
+            window.contentfulFragment._readyStack.push(callback);
+          }
+        }
+      };
+      window.contentfulExtension.init(window.contentfulFragment.init);
+    </script>
+
     <script src="{{rootURL}}assets/vendor.js"></script>
     <script src="{{rootURL}}assets/contentful-fragment.js"></script>
 

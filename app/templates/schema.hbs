@@ -1,0 +1,32 @@
+<p>Danger! This is a developer-only zone.</p> 
+{{#link-to 'index'}}Back to Safety{{/link-to}}
+<hr />
+<h1>Fragment Blueprint</h1>
+{{#each model as |field|}}
+  <div class='cf-form-field'>
+    <label>
+      Key
+      {{input value=field.key class='cf-form-input' placeholder="Blog Title"}}
+    </label> 
+  </div>
+
+  <div class='cf-form-field'>
+    <label>
+      Type
+      <select onchange={{action "setFieldType" value="target.value"}} class='cf-form-input'>
+        <option disabled selected>Choose a Field Type</option>
+        <option value="{{field.uuid}}-Symbol">Short Text</option>
+      </select>
+    </label> 
+  </div>
+
+  <hr />
+{{else}}
+  <p>Your Fragment Blueprint doesn't have any fields.</p>
+{{/each}}
+
+<button class='cf-btn-primary' {{action 'addEmptySchemaField'}}>Add a Field</button>
+
+<hr />
+<button class='cf-btn-primary' {{action 'save'}}>Save</button>
+<button class='cf-btn-primary' {{action 'cancel'}}>Cancel</button>
