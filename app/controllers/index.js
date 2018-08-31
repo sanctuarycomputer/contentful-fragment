@@ -17,11 +17,22 @@ const newFragmentFromSchema = schema => {
 };
 
 export default Controller.extend({
+  editingUUID: "",
+
   actions: {
+    editFragment(uuid) {
+      set(this, 'editingUUID', uuid);
+    },
+    cancelEditing() {
+      set(this, 'editingUUID', "");
+    },
     addFragment() {
       if (this.model._schema) {
         set(this, 'model.fragments', this.model.fragments || []);
-        this.model.fragments.pushObject(newFragmentFromSchema(this.model._schema));
+        const newFragment = newFragmentFromSchema(this.model._schema);
+        this.model.fragments.pushObject(newFragment);
+        const uuid = get(newFragment.findBy('key', 'uuid'), 'value');
+        set(this, 'editingUUID', uuid);
       }
     },
     removeFragment(fragment) {

@@ -2,14 +2,38 @@ import Controller from '@ember/controller';
 import { set } from '@ember/object';
 import generateUUID from 'contentful-fragment/lib/generateUUID';
 
+const validateField = field => {
+  let validation = '';
+  if (!field.key || field.key.length === 0) validation += 'Enter a key for this field';
+  if (!field.type) {
+    if (validation.length) validation += ', ';
+    validation += 'Select a field type';
+  }
+  return validation;
+};
+
 export default Controller.extend({
+  deletingUUID: "",
   actions: {
+    stageFieldDeletion(field) {
+      set(this, 'deletingUUID', field.uuid);
+    },
+    unstageFieldDeletion() {
+      set(this, 'deletingUUID', "");
+    },
     addEmptySchemaField() {
-      this.model.pushObject({ key: '', type: null, uuid: generateUUID() });
+      const field = { key: '', type: null, uuid: generateUUID(), validation: '' };
+      set(field, 'validation', validateField(field));
+      this.model.pushObject(field);
+    },
+    keyDidChange(field) {
+      set(field, 'validation', validateField(field));
     },
     setFieldType(value) {
       const [uuid, type] = value.split('-');
-      set(this.model.findBy('uuid', uuid), 'type', type);
+      const field = this.model.findBy('uuid', uuid);
+      set(field, 'type', type);
+      set(field, 'validation', validateField(field));
     },
     cancel() {
       this.transitionToRoute('index');
