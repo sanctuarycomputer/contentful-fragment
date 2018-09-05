@@ -12,6 +12,11 @@ const DUMMY_DATA = {
       "key": "Event Location",
       "type": "Symbol",
       "uuid": "6a92b9"
+    },
+    {
+      "key": "Event Date",
+      "type": "Date",
+      "uuid": "a592h9"
     }
   ],
   "fragments": [
@@ -22,11 +27,13 @@ const DUMMY_DATA = {
       },
       {
         "key": "Event Name",
-        "value": "Halloween Party"
+        "value": "Halloween Party",
+        "_schemaRef": "32d705"
       },
       {
         "key": "Event Location",
-        "value": "Sanctuary Computer Inc"
+        "value": "Sanctuary Computer Inc",
+        "_schemaRef": "6a92b9"
       }
     ],
     [
@@ -36,11 +43,13 @@ const DUMMY_DATA = {
       },
       {
         "key": "Event Name",
-        "value": "Rooftop Drinks"
+        "value": "Rooftop Drinks",
+        "_schemaRef": "32d705"
       },
       {
         "key": "Event Location",
-        "value": "Human NYC"
+        "value": "Human NYC",
+        "_schemaRef": "6a92b9"
       }
     ]
   ]

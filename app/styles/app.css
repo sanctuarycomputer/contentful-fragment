@@ -95,3 +95,12 @@ hr {
   font-weight: 600;
   letter-spacing: 0.1em;
 }
+
+.pika-single {
+  font-family: "Avenir Next W01", Helvetica, sans-serif;
+  text-rendering: optimizeLegibility;
+  font-size: 14px;
+  line-height: 18px;
+  color: #2d2f31;
+}
+

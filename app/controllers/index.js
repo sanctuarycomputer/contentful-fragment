@@ -44,9 +44,14 @@ export default Controller.extend({
         set(this.model, 'fragments', newFragments);
       }
     },
-    save() {
-      console.log(this.model, 'save');
+    save(arg) {
       this.extension.field.setValue(this.model);
+    },
+    saveDate(fragmentField, date) {
+      if (date) {
+        set(fragmentField, 'value', date.toISOString());
+        this.extension.field.setValue(this.model);
+      }
     }
   }
 });

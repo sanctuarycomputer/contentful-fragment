@@ -54,8 +54,8 @@
                 Type
                 <select onchange={{action "setFieldType" value="target.value"}} class='cf-form-input'>
                   <option disabled selected={{not field.type}}>Choose a Field Type</option>
-                  {{!-- TODO: Doesnt keep it's value visually --}}
                   <option value="{{field.uuid}}-Symbol" selected={{eq field.type "Symbol"}}>Short Text</option>
+                  <option value="{{field.uuid}}-Date" selected={{eq field.type "Date"}}>UTC Date</option>
                 </select>
               </label> 
             </div>

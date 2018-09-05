@@ -5,6 +5,7 @@
         <div class='clearfix'>
 
             {{#with (get (find-by 'key' 'uuid' fragment) 'value') as |uuid|}}
+              
               {{#if (eq editingUUID uuid)}}
                 <div class='col-11 left pr1'>
                   {{#each fragment as |fragmentField|}}
@@ -12,7 +13,18 @@
                       <div class='cf-form-field'>
                         <label>
                           {{fragmentField.key}}
-                          {{input value=fragmentField.value class='cf-form-input' key-up="save"}}
+                          {{#if (eq fragmentField.type 'Symbol')}}
+                            {{input value=fragmentField.value class='cf-form-input' key-up="save"}}
+                          {{/if}}
+                          {{#if (eq fragmentField.type 'Date')}}
+                            {{pikaday-input 
+                              class='cf-form-input' 
+                              format="dddd, Do MMMM YYYY"
+                              useUTC=true 
+                              value=fragmentField.value 
+                              onSelection=(action "saveDate" fragmentField)
+                            }}
+                          {{/if}}
                         </label> 
                       </div>
                     {{/if}}
@@ -43,7 +55,16 @@
                 <div class='col-11 left pr1'>
                   {{#each fragment as |fragmentField|}}
                     {{#if (not-eq fragmentField.key 'uuid')}}
-                      <p class='my1'>{{fragmentField.key}}: {{fragmentField.value}}</p>
+                      
+                      {{#if (eq fragmentField.type 'Symbol')}}
+                        <p class='my1'>{{fragmentField.key}}: {{fragmentField.value}}</p>
+                      {{/if}}
+                      {{#if (eq fragmentField.type 'Date')}}
+                        <p class='my1'>
+                          {{fragmentField.key}}: {{if fragmentField.value (moment-format fragmentField.value 'dddd, Do MMMM YYYY')}}
+                        </p>
+                      {{/if}}
+
                     {{/if}}
                   {{/each}}
                 </div>
@@ -58,6 +79,7 @@
                   </div>
                 </div>
               {{/if}}
+
             {{/with}}
 
         </div>
