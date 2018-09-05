@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-const DEV = true;
+const DEV = false;
 const DUMMY_DATA = {
   "_schema": [
     {
