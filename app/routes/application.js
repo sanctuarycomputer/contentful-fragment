@@ -1,6 +1,6 @@
 import Route from '@ember/routing/route';
 
-const DEV = false;
+const DEV = true;
 const DUMMY_DATA = {
   "_schema": [
     {
@@ -58,7 +58,7 @@ const DUMMY_DATA = {
 const DummyExtension = {
   _isDummy: true,
   field: {
-    _value: DUMMY_DATA,
+    _value: null,
     getValue: function() {
       return { ...DummyExtension.field._value };
     },

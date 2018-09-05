@@ -11,7 +11,7 @@ const newFragmentFromSchema = schema => {
   return schema.reduce((acc, field) => {
     return [
       ...acc, 
-      { key: field.key, value: defaultValueForType(field.type) }
+      { key: field.key, value: defaultValueForType(field.type), type: field.type, _schemaRef: field.uuid }
     ];
   }, [{ key: 'uuid', value: generateUUID() }]);
 };
