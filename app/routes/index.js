@@ -10,7 +10,7 @@ const coerce = (type, value) => {
 };
 
 const ensureFragmentsAreSyncedToSchema = ({ fragments, _schema }) => {
-  const validatedFragments = fragments.map(fragment => {
+  const validatedFragments = (fragments || []).map(fragment => {
     const validatedFragment = _schema.map(schemaField => {
       const dataForSchemaField = fragment.findBy('_schemaRef', schemaField.uuid);
       return {
