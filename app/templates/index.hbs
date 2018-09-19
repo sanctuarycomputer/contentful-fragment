@@ -1,11 +1,10 @@
-{{#if model._schema}}
-  {{#each model.fragments as |fragment|}}
+{{#if extension.data._schema}}
+  {{#each extension.data.fragments as |fragment|}}
     <div class='cf-card mb1'>
       <div class='cf-card-inner'>
         <div class='clearfix'>
 
             {{#with (get (find-by 'key' 'uuid' fragment) 'value') as |uuid|}}
-              
               {{#if (eq editingUUID uuid)}}
                 <div class='col-11 left pr1'>
                   {{#each fragment as |fragmentField|}}
@@ -91,7 +90,7 @@
     <p class='mb3'>Hey! You haven't added any entries yet. <a {{action 'addFragment'}}>Add one now!</a></p>
   {{/each}}
 
-  <div class='clearfix mt2'>
+  <div class='clearfix mt2 pb2'>
     <a {{action 'addFragment'}}>
       <div class='icon-wrapper'>
         <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
@@ -121,4 +120,3 @@
     Setup Fragment
   {{/link-to}}
 {{/if}}
-
