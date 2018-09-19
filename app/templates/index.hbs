@@ -26,6 +26,36 @@
                               reposition=false
                             }}
                           {{/if}}
+                          {{#if (eq fragmentField.type 'Blob')}}
+                            {{#file-upload name="photos"
+                                           onfileadd=(action "saveBlob" fragmentField) as |queue|}}
+                              <a class="button">
+                                {{#if queue.files.length}}
+                                  Uploading...
+                                {{else}}
+                                  {{if fragmentField.value 'Replace File' 'Upload File'}}
+                                {{/if}}
+                              </a>
+                            {{/file-upload}}
+                            {{#if fragmentField.value}}
+                              <div class="blob-preview cf-card my1">
+                                <div class="cf-card-inner flex items-center">
+                                  {{#if (image-type fragmentField.value.type)}}
+                                    <img src="{{fragmentField.value.data}}" />
+                                  {{else}}
+                                    <div class="blob-no-preview flex items-center p1">
+                                      <p class="cf-card-status">No Preview Available</p>
+                                    </div>
+                                  {{/if}}
+                                  <div class="blob-meta ml1">
+                                    <p>File Name: {{fragmentField.value.name}}</p>
+                                    <p>File Size: {{fragmentField.value.size}}</p>
+                                    <p>File Type: {{fragmentField.value.type}}</p>
+                                  </div>
+                                </div>
+                              </div>
+                            {{/if}}
+                          {{/if}}
                         </label> 
                       </div>
                     {{/if}}
@@ -64,6 +94,29 @@
                         <p class='my1'>
                           {{fragmentField.key}}: {{if fragmentField.value (moment-format fragmentField.value 'dddd, Do MMMM YYYY')}}
                         </p>
+                      {{/if}}
+                      {{#if (eq fragmentField.type 'Blob')}}
+                        <p class='my1'>
+                          {{fragmentField.key}}:
+                        </p>
+                        {{#if fragmentField.value}}
+                          <div class="blob-preview cf-card mb1">
+                            <div class="cf-card-inner flex items-center">
+                              {{#if (image-type fragmentField.value.type)}}
+                                <img src="{{fragmentField.value.data}}" />
+                              {{else}}
+                                <div class="blob-no-preview flex items-center p1">
+                                  <p class="cf-card-status">No Preview Available</p>
+                                </div>
+                              {{/if}}
+                              <div class="blob-meta ml1">
+                                <p>File Name: {{fragmentField.value.name}}</p>
+                                <p>File Size: {{fragmentField.value.size}}</p>
+                                <p>File Type: {{fragmentField.value.type}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        {{/if}}
                       {{/if}}
 
                     {{/if}}

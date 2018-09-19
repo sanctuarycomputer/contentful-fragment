@@ -104,3 +104,15 @@ hr {
   color: #2d2f31;
 }
 
+.blob-preview img {
+  max-width: 100px;
+}
+
+.blob-preview .blob-meta {
+  display: inline-block;
+}
+
+.blob-preview .blob-no-preview {
+  height: 100%;
+  background-color: #d3dce0;
+}
