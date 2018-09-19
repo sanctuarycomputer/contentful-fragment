@@ -7,6 +7,9 @@ module.exports = function(defaults) {
     // Add options here
     babel: {
       plugins: ['transform-object-rest-spread']
+    },
+    fingerprint: {
+      prepend: 'https://rawgit.com/sanctuarycomputer/contentful-fragment/master/dist/'
     }
   });
 
