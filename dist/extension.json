@@ -1,7 +1,7 @@
 {
   "id": "contentful-fragment",
   "name": "Contentful Fragment",
-  "src": "https://extension.contentful-fragment.io",
+  "src": "./index.html",
   "fieldTypes": ["Object"],
   "parameters": {
     "instance": [
