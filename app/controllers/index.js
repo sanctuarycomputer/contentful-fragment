@@ -42,14 +42,17 @@ export default Controller.extend({
     },
 
     saveBlob(fragmentField, file) {
+      if (!file) return;
+
       const { name, size, type } = file;
       return file.readAsDataURL().then(data => {
         set(fragmentField, 'value', {
           data, name, size, type
         });
+        return get(this, 'extension').persist();
+      }).finally(() => {
         const queue = get(this, 'fileQueue.queues').find(queue => get(queue, 'files').includes(file));
         if (queue) queue.remove(file);
-        return get(this, 'extension').persist();
       });
     }
   }
