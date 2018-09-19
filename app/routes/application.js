@@ -19,6 +19,11 @@ const DUMMY_DATA = {
       "key": "Event Date",
       "type": "Date",
       "uuid": "a592h9"
+    },
+    {
+      "key": "Logo",
+      "type": "Blob",
+      "uuid": "a592f3"
     }
   ],
   "fragments": [
@@ -44,6 +49,12 @@ const DUMMY_DATA = {
         "value": null,
         "type": "Date",
         "_schemaRef": "a592h9"
+      },
+      {
+        "key": "Logo",
+        "value": null,
+        "type": "Blob",
+        "_schemaRef": "a592f3"
       }
     ],
     [
@@ -68,6 +79,12 @@ const DUMMY_DATA = {
         "value": null,
         "type": "Date",
         "_schemaRef": "a592h9"
+      },
+      {
+        "key": "Logo",
+        "value": null,
+        "type": "Blob",
+        "_schemaRef": "a592f3"
       }
     ]
   ]

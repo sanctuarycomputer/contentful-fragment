@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { get, set } from '@ember/object';
 
-const emptyForType = (type) => {
+const emptyForType = (/*type*/) => {
   // TODO
   return null;
 };
@@ -40,7 +40,7 @@ const newFragmentFromSchema = schema => {
       ...acc, 
       { 
         key: field.key, 
-        value: emtpyForType(field.type), 
+        value: emptyForType(field.type), 
         type: field.type, 
         _schemaRef: field.uuid 
       }

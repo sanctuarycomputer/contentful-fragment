@@ -4,6 +4,7 @@ import { inject as service } from '@ember/service';
 
 export default Controller.extend({
   extension: service(), 
+  fileQueue: service(),
 
   editingUUID: "",
 
@@ -28,6 +29,7 @@ export default Controller.extend({
       set(this, 'editingUUID', "");
     },
 
+    // Savers
     save() {
       get(this, 'extension').persist();
     },
@@ -37,6 +39,21 @@ export default Controller.extend({
         set(fragmentField, 'value', date.toISOString());
         get(this, 'extension').persist();
       }
+    },
+
+    saveBlob(fragmentField, file) {
+      if (!file) return;
+
+      const { name, size, type } = file;
+      return file.readAsDataURL().then(data => {
+        set(fragmentField, 'value', {
+          data, name, size, type
+        });
+        return get(this, 'extension').persist();
+      }).finally(() => {
+        const queue = get(this, 'fileQueue.queues').find(queue => get(queue, 'files').includes(file));
+        if (queue) queue.remove(file);
+      });
     }
   }
 });
