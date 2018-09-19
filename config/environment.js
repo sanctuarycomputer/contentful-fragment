@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'contentful-fragment',
     environment,
     rootURL: '/sanctuarycomputer/contentful-fragment/master/dist/',
-    locationType: 'auto',
+    locationType: 'hash',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
