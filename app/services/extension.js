@@ -1,7 +1,7 @@
 import Service from '@ember/service';
 import { get, set } from '@ember/object';
 
-const emptyForType = (type) => {
+const emptyForType = (/*type*/) => {
   // TODO
   return null;
 };

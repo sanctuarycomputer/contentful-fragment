@@ -40,7 +40,7 @@
                             {{#if fragmentField.value}}
                               <div class="blob-preview cf-card my1">
                                 <div class="cf-card-inner flex items-center">
-                                  {{#if (image-type fragmentField.value.type)}}
+                                  {{#if (is-image-type fragmentField.value.type)}}
                                     <img src="{{fragmentField.value.data}}" />
                                   {{else}}
                                     <div class="blob-no-preview flex items-center p1">
@@ -102,7 +102,7 @@
                         {{#if fragmentField.value}}
                           <div class="blob-preview cf-card mb1">
                             <div class="cf-card-inner flex items-center">
-                              {{#if (image-type fragmentField.value.type)}}
+                              {{#if (is-image-type fragmentField.value.type)}}
                                 <img src="{{fragmentField.value.data}}" />
                               {{else}}
                                 <div class="blob-no-preview flex items-center p1">

@@ -6,12 +6,9 @@ import hbs from 'htmlbars-inline-precompile';
 module('Integration | Helper | image-type', function(hooks) {
   setupRenderingTest(hooks);
 
-  // Replace this with your real tests.
   test('it renders', async function(assert) {
-    this.set('inputValue', '1234');
-
-    await render(hbs`{{image-type inputValue}}`);
-
-    assert.equal(this.element.textContent.trim(), '1234');
+    this.set('type', 'image/gif');
+    await render(hbs`{{is-image-type type}}`);
+    assert.equal(this.element.textContent.trim(), 'true');
   });
 });
