@@ -1,4 +1,6 @@
 import Route from '@ember/routing/route';
+import { get } from '@ember/object';
+import { inject as service } from '@ember/service';
 
 const DEV = false;
 const DUMMY_DATA = {
@@ -28,12 +30,20 @@ const DUMMY_DATA = {
       {
         "key": "Event Name",
         "value": "Halloween Party",
+        "type": "Symbol",
         "_schemaRef": "32d705"
       },
       {
         "key": "Event Location",
         "value": "Sanctuary Computer Inc",
+        "type": "Symbol",
         "_schemaRef": "6a92b9"
+      },
+      {
+        "key": "Event Date",
+        "value": null,
+        "type": "Date",
+        "_schemaRef": "a592h9"
       }
     ],
     [
@@ -44,12 +54,20 @@ const DUMMY_DATA = {
       {
         "key": "Event Name",
         "value": "Rooftop Drinks",
+        "type": "Symbol",
         "_schemaRef": "32d705"
       },
       {
         "key": "Event Location",
         "value": "Human NYC",
+        "type": "Symbol",
         "_schemaRef": "6a92b9"
+      },
+      {
+        "key": "Event Date",
+        "value": null,
+        "type": "Date",
+        "_schemaRef": "a592h9"
       }
     ]
   ]
@@ -58,7 +76,7 @@ const DUMMY_DATA = {
 const DummyExtension = {
   _isDummy: true,
   field: {
-    _value: null,
+    _value: DUMMY_DATA,
     getValue: function() {
       return { ...DummyExtension.field._value };
     },
@@ -71,10 +89,16 @@ const DummyExtension = {
 };
 
 export default Route.extend({
+  extension: service(),
+
   model() {
     if (DEV) {
       return DummyExtension;
     }
     return new Promise(window.contentfulFragment.getExtension);
+  },
+
+  afterModel(contentfulExtension) {
+    get(this, 'extension').setup(contentfulExtension);
   }
 });
