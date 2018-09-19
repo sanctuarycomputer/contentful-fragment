@@ -1,0 +1,16 @@
+{
+  "id": "contentful-fragment",
+  "name": "Contentful Fragment",
+  "src": "https://extension.contentful-fragment.io",
+  "fieldTypes": ["Object"],
+  "parameters": {
+    "instance": [
+      {
+        "id": "schemaShorthand",
+        "type": "Symbol",
+        "name": "Predefined Schema",
+        "description": "Optional - Use our Schema Shorthand to defined a schema for your content models."
+      }
+    ]
+  }
+}
