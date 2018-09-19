@@ -40,7 +40,7 @@ const newFragmentFromSchema = schema => {
       ...acc, 
       { 
         key: field.key, 
-        value: emtpyForType(field.type), 
+        value: emptyForType(field.type), 
         type: field.type, 
         _schemaRef: field.uuid 
       }
