@@ -3,6 +3,22 @@
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
+## Installation on Contentful Space
+
+1. Navigate to your Contentful Space
+2. Select the "Settings" dropdown, and click "Extensions"
+3. Click the "Add Extension" button, and select "Add a new extension"
+4. For name, enter `Contentful Fragment`
+5. For Field Types, deselect Symbol, and select `Object`
+6. For hosting, select `Self-hosted (src)`
+7. For Hosting, enter `https://extension.contentful-fragment.io`
+
+Finally, click "Save".
+
+Now, when you're adding fields to your Content Model, you'll be able to
+use Contentful Fragment with any `JSON object` field type. Just navigate
+to the "Appearance" settings for your field, and select "Contentful Fragment"!
+
 ## Prerequisites
 
 You will need the following things properly installed on your computer.
