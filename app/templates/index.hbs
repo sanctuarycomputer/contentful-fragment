@@ -27,7 +27,7 @@
                             }}
                           {{/if}}
                           {{#if (eq fragmentField.type 'Blob')}}
-                            {{#file-upload name="photos"
+                            {{#file-upload name=fragmentField.key
                                            onfileadd=(action "saveBlob" fragmentField) as |queue|}}
                               <a class="button">
                                 {{#if queue.files.length}}

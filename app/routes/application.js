@@ -2,7 +2,7 @@ import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-const DEV = false;
+const DEV = true;
 const DUMMY_DATA = {
   "_schema": [
     {
