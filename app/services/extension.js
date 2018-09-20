@@ -169,8 +169,24 @@ export default Service.extend({
     set(this, 'data._schema', newFields);
   },
 
+  makeSimpleFragments() {
+    const simpleFragments = (get(this, 'data.fragments') || []).reduce((simpleFragments, fragment) => {
+      const uuid = get(fragment.findBy('key', 'uuid'), 'value');
+
+      simpleFragments[uuid] = fragment.reduce((simpleFragment, fragmentField) => {
+        if (fragmentField.key === "uuid") return simpleFragment;
+        simpleFragment[fragmentField.key.camelize()] = fragmentField.value;
+        return simpleFragment;
+      }, {});
+
+      return simpleFragments;
+    }, {});
+
+    set(this, 'data.simpleFragments', simpleFragments);
+  },
+
   persist() {
-    // TODO: ensure all fields are valid before saving
-    return this.extension.field.setValue(this.model);
+    this.makeSimpleFragments();
+    return this.extension.field.setValue(get(this, 'data'));
   },
 });
