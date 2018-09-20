@@ -26,7 +26,7 @@ need to use a predefined schema.
 
 A predefined schema is simply a string, formatted like so:
 ```
-[Schema Key]:[Schema Type],[Schema Key],[Schema Type]
+[Schema Key]:[Schema Type],[Schema Key]:[Schema Type]
 ```
 
 For example:
