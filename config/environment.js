@@ -4,7 +4,8 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'contentful-fragment',
     environment,
-    rootURL: '/sanctuarycomputer/contentful-fragment/master/dist/index.html',
+    rootURL: '/sanctuarycomputer/contentful-fragment/master/dist/',
+    routerRootURL: '/index.html',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
