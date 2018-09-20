@@ -4,8 +4,8 @@ module.exports = function(environment) {
   let ENV = {
     modulePrefix: 'contentful-fragment',
     environment,
-    rootURL: '/sanctuarycomputer/contentful-fragment/master/dist/',
-    routerRootURL: '/index.html',
+    rootURL: '/',
+    routerRootURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
@@ -45,6 +45,8 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
+    ENV.rootURL = '/sanctuarycomputer/contentful-fragment/master/dist/';
+    ENV.routerRootURL = '/index.html';
     // here you can enable a production-specific feature
   }
 

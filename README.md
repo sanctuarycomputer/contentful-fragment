@@ -1,23 +1,45 @@
-# contentful-fragment
+# Contentful Fragment 
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+Contentful Fragment is a [Contentful UI Extension](https://www.contentful.com/developers/docs/concepts/uiextensions/) that allows content
+modellers to add a "mini" model fragment inside of their content types.
+It's intended for small, repeatable pieces of content that don't necessarily 
+warrant their own model.
 
 ## Installation on Contentful Space
 
 1. Navigate to your Contentful Space
 2. Select the "Settings" dropdown, and click "Extensions"
-3. Click the "Add Extension" button, and select "Add a new extension"
-4. For name, enter `Contentful Fragment`
-5. For Field Types, deselect Symbol, and select `Object`
-6. For hosting, select `Self-hosted (src)`
-7. For Hosting, enter `https://extension.contentful-fragment.io`
+3. Click the "Add Extension" button, and select "Install from Github"
+4. To get auto-updates on the master channel, enter `https://github.com/sanctuarycomputer/contentful-fragment/blob/master/dist/extension.json`
 
-Finally, click "Save".
+Finally, click "Install".
 
 Now, when you're adding fields to your Content Model, you'll be able to
 use Contentful Fragment with any `JSON object` field type. Just navigate
 to the "Appearance" settings for your field, and select "Contentful Fragment"!
+
+## Using a predefined schema for all instances
+
+In order to strictly dictate the schema for a Contentful Fragment so that
+your content editor can not change it (and potentially break the site), you'll
+need to use a predefined schema.
+
+A predefined schema is simply a string, formatted like so:
+```
+[Schema Key]:[Schema Type],[Schema Key]:[Schema Type]
+```
+
+For example:
+```
+Event Name:Symbol,Event Date:Date,Company Logo:Blob
+```
+
+To configure that schema, as a Content Modeller, navigate to the "Appearance" 
+tab of your Contentful field, and under "Predefined Schema", enter your schema 
+string.
+
+This will disable the schema editor from the Fragment UI, and preload that 
+schema for your fragments to use in each instance of that model.
 
 ## Prerequisites
 
