@@ -84,17 +84,19 @@ export default Service.extend({
     const loadedSchema = parsedSchemaFields.reduce((acc, fieldTuple) => {
       const [key, type] = fieldTuple;
       if (key.length === 0) {
+        // eslint-disable-next-line
         console.warn(
           `Contentful Fragment: Your Predefined Schema included a blank schema key! Please refer to the documentation.`
         );
         return acc;
       }
       if (!TYPES.includes(type)) {
+        // eslint-disable-next-line
         console.warn(
           `Contentful Fragment: Your Predefined Schema included unknown type: ${type}. Must be one of <${TYPES.join(' ')}>`
-        );
+        ); 
         return acc;
-      };
+      }
       const match = existingSchema.findBy('key', fieldTuple[0]);
       return [...acc, {
         uuid: (match ? match.uuid : generateUUID()), key, type
