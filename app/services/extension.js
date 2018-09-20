@@ -57,6 +57,9 @@ export default Service.extend({
 
   setup(extension) {
     set(this, 'data', extension.field.getValue() || {});
+    console.log(
+      extension.parameters.instance.schemaShorthand, 'shorthand'
+    );
     set(this, 'extension', extension);
   },
 
