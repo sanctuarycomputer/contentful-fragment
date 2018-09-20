@@ -153,17 +153,22 @@
       Add Entry
     </a>
 
-    {{#link-to 'schema' class='ml2'}}
-      <div class='icon-wrapper'>
-        <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path><path d="M0 0h24v24H0z" fill="none"></path>
-        </svg>
-      </div>
-      Edit Fragment
-    {{/link-to}}
+    {{#unless extension.data._settings.usesPredefinedSchema}}
+      {{#link-to 'schema' class='ml2'}}
+        <div class='icon-wrapper'>
+          <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path><path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+        </div>
+        Edit Fragment
+      {{/link-to}}
+    {{/unless}}
   </div>
 {{else}}
-  <p>Please define your Fragment before adding content.</p>
+  <p>
+    Please define your Fragment before adding content. You can do this in the UI below, or with a
+    <a href="https://github.com/sanctuarycomputer/contentful-fragment" target="_blank">predefined schema.</a>
+  </p>
   {{#link-to 'schema'}}
     <div class='icon-wrapper'>
       <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">

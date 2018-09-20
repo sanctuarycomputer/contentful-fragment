@@ -1,6 +1,12 @@
 import Service from '@ember/service';
 import { get, set } from '@ember/object';
 
+const TYPES = [
+  'Symbol',
+  'Date',
+  'Blob'
+];
+
 const emptyForType = (/*type*/) => {
   // TODO
   return null;
@@ -57,10 +63,48 @@ export default Service.extend({
 
   setup(extension) {
     set(this, 'data', extension.field.getValue() || {});
-    console.log(
-      extension.parameters.instance.schemaShorthand, 'shorthand'
-    );
     set(this, 'extension', extension);
+    this.loadSchemaFromShorthand();
+    this.syncFragmentsToSchema();
+  },
+
+  setSetting(key, value) {
+    set(this, 'data._settings', get(this, 'data._settings') || {});
+    set(this, `data._settings.${key}`, value);
+  },
+
+  loadSchemaFromShorthand() {
+    const shorthand = (get(this, 'extension.parameters.instance.schemaShorthand') || "");
+    if (!shorthand.length) return;
+
+    const parsedSchemaFields = 
+      shorthand.split(",").map(tuple => tuple.split(":").map(t => t.trim()));
+    const existingSchema = get(this, 'data._schema') || [];
+
+    const loadedSchema = parsedSchemaFields.reduce((acc, fieldTuple) => {
+      const [key, type] = fieldTuple;
+      if (key.length === 0) {
+        console.warn(
+          `Contentful Fragment: Your Predefined Schema included a blank schema key! Please refer to the documentation.`
+        );
+        return acc;
+      }
+      if (!TYPES.includes(type)) {
+        console.warn(
+          `Contentful Fragment: Your Predefined Schema included unknown type: ${type}. Must be one of <${TYPES.join(' ')}>`
+        );
+        return acc;
+      };
+      const match = existingSchema.findBy('key', fieldTuple[0]);
+      return [...acc, {
+        uuid: (match ? match.uuid : generateUUID()), key, type
+      }];
+    }, []).filter(schemaField => {
+      return parsedSchemaFields.find(schemaTuple => schemaTuple[0] === schemaField.key);
+    });
+
+    this.setSetting('usesPredefinedSchema', true);
+    set(this, 'data._schema', loadedSchema);
   },
 
   /* Main Editor */

@@ -92,6 +92,11 @@ const DUMMY_DATA = {
 
 const DummyExtension = {
   _isDummy: true,
+  parameters: {
+    instance: {
+      schemaShorthand: "Event Location:Symbol,Event Date:Date,Logo:Blob"
+    }
+  },
   field: {
     _value: DUMMY_DATA,
     getValue: function() {
