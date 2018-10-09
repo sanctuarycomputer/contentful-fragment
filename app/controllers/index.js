@@ -7,6 +7,7 @@ export default Controller.extend({
   fileQueue: service(),
 
   editingUUID: "",
+  showPreview: false,
 
   actions: {
     addFragment() {
@@ -54,6 +55,14 @@ export default Controller.extend({
         const queue = get(this, 'fileQueue.queues').find(queue => get(queue, 'files').includes(file));
         if (queue) queue.remove(file);
       });
-    }
+    }, 
+
+    showPreview() {
+      set(this, 'showPreview', true);
+    },
+
+    hidePreview() {
+      set(this, 'showPreview', false);
+    },
   }
 });

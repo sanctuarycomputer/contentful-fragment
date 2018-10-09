@@ -16,6 +16,11 @@ const DUMMY_DATA = {
       "uuid": "6a92b9"
     },
     {
+      "key": "Event Url",
+      "type": "Symbol",
+      "uuid": "6a27d9"
+    },
+    {
       "key": "Event Date",
       "type": "Date",
       "uuid": "a592h9"
@@ -43,6 +48,12 @@ const DUMMY_DATA = {
         "value": "Sanctuary Computer Inc",
         "type": "Symbol",
         "_schemaRef": "6a92b9"
+      },
+      {
+        "key": "Event Url",
+        "value": "https://www.google.com/maps/place/Sanctuary+Computer/@40.71811,-73.997507,17z/data=!3m1!4b1!4m5!3m4!1s0x89c259880e5637e3:0xcdc06390643521f5!8m2!3d40.71811!4d-73.995313",
+        "type": "Symbol",
+        "_schemaRef": "6a27d9"
       },
       {
         "key": "Event Date",
@@ -94,7 +105,7 @@ const DummyExtension = {
   _isDummy: true,
   parameters: {
     instance: {
-      schemaShorthand: "Event Location:Symbol,Event Date:Date,Logo:Blob"
+      schemaShorthand: "Event Location:Symbol,Event Url: Symbol,Event Date:Date,Logo:Blob"
     }
   },
   field: {

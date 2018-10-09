@@ -60,12 +60,14 @@ const newFragmentFromSchema = schema => {
 export default Service.extend({
   data: null,
   extension: null,
+  preview: null,
 
   setup(extension) {
     set(this, 'data', extension.field.getValue() || {});
     set(this, 'extension', extension);
     this.loadSchemaFromShorthand();
     this.syncFragmentsToSchema();
+    this.makeSimpleFragments();
   },
 
   setSetting(key, value) {
@@ -115,6 +117,7 @@ export default Service.extend({
       set(this, 'data.fragments', get(this, 'data.fragments') || []);
       const newFragment = newFragmentFromSchema(get(this, 'data._schema'));
       get(this, 'data.fragments').pushObject(newFragment);
+      this.persist();
       return newFragment;
     }
   },
@@ -126,6 +129,7 @@ export default Service.extend({
         return get(fragment.findBy('key', 'uuid'), 'value') === uuid;
       });
       set(this, 'data.fragments', newFragments);
+      this.persist();
     }
   },
 
@@ -153,6 +157,7 @@ export default Service.extend({
     });
 
     set(this, 'data.fragments', syncedFragments);
+    this.persist();
   },
 
   addSchemaField() {
@@ -170,13 +175,17 @@ export default Service.extend({
   },
 
   makeSimpleFragments() {
-    const simpleFragments = (get(this, 'data.fragments') || []).reduce((simpleFragments, fragment) => {
+    const simpleFragments = (get(this, 'data.fragments') || []).reduce((simpleFragments, fragment, index) => {
       const uuid = get(fragment.findBy('key', 'uuid'), 'value');
 
       simpleFragments[uuid] = fragment.reduce((simpleFragment, fragmentField) => {
         if (fragmentField.key === "uuid") return simpleFragment;
         simpleFragment[fragmentField.key.camelize()] = fragmentField.value;
-        return simpleFragment;
+        return {
+          index,
+          uuid,
+          ...simpleFragment
+        };
       }, {});
 
       return simpleFragments;
@@ -185,8 +194,18 @@ export default Service.extend({
     set(this, 'data.simpleFragments', simpleFragments);
   },
 
+  generateJSONPreview() {
+    try {
+      const jsonPreview = JSON.stringify(this.data, null, 2);
+      set(this, 'preview', jsonPreview);
+    } catch (e) {
+      set(this, 'preview', 'Could not generate preview');
+    }
+  },
+
   persist() {
     this.makeSimpleFragments();
+    this.generateJSONPreview();
     return this.extension.field.setValue(get(this, 'data'));
   },
 });
