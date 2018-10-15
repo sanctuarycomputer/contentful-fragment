@@ -12,9 +12,16 @@
   "repository": "",
   "scripts": {
     "build": "ember build",
+    "build-production": "ember build --environment=production",
     "lint:js": "eslint .",
     "start": "ember serve",
     "test": "ember test"
+  },
+  "husky": {
+    "hooks" :{
+      "pre-commit": "yarn build-production && git add dist",
+      "pre-push": "yarn test && yarn lint:js"
+    }
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -53,6 +60,7 @@
     "ember-source": "~3.3.0",
     "ember-truth-helpers": "^2.1.0",
     "eslint-plugin-ember": "^5.0.0",
+    "husky": "^1.1.2",
     "loader.js": "^4.2.3",
     "qunit-dom": "^0.6.2"
   },
