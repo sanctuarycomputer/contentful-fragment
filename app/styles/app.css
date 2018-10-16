@@ -96,6 +96,11 @@ hr {
   letter-spacing: 0.1em;
 }
 
+.cf-card-field {
+  text-overflow: ellipsis;
+  max-width: 20rem;
+}
+
 .pika-single {
   font-family: "Avenir Next W01", Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
@@ -115,4 +120,17 @@ hr {
 .blob-preview .blob-no-preview {
   height: 100%;
   background-color: #d3dce0;
+}
+
+.json-preview {
+  height: 200px;
+  border: 1px solid #d3dce0;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+  background-color: #efefef;
+  overflow: scroll;
+  width: 100%;
+  font-family: monospace;
+  font-size: .75rem;
+  line-height:1.2;
 }
