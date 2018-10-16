@@ -64,5 +64,9 @@ export default Controller.extend({
     hidePreview() {
       set(this, 'showPreview', false);
     },
+
+    updateSort(order) {
+      get(this, 'extension').updateSort(order);
+    }
   }
 });
