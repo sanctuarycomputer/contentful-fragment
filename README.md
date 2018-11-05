@@ -58,9 +58,12 @@ You will need the following things properly installed on your computer.
 
 ## Running / Development
 
+* Change **line 5** of **application.js** to `const DEV = true;` to activate dummy data on preview page.
 * `ember serve`
 * Visit your app at [http://localhost:4200](http://localhost:4200).
 * Visit your tests at [http://localhost:4200/tests](http://localhost:4200/tests).
+
+Don't forget to change **line 5** of **application.js** back to `const DEV = false;` before you commit your changes!
 
 ### Code Generators
 
