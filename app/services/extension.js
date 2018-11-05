@@ -77,8 +77,10 @@ export default Service.extend({
 
   loadSchemaFromShorthand() {
     const shorthand = (get(this, 'extension.parameters.instance.schemaShorthand') || "");
-    if (!shorthand.length) return;
-
+    if (!shorthand.length) {
+      set(this, 'data._schema', []);
+      return;
+    }
     const parsedSchemaFields = 
       shorthand.split(",").map(tuple => tuple.split(":").map(t => t.trim()));
     const existingSchema = get(this, 'data._schema') || [];
