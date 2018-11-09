@@ -77,10 +77,8 @@ export default Service.extend({
 
   loadSchemaFromShorthand() {
     const shorthand = (get(this, 'extension.parameters.instance.schemaShorthand') || "");
-    if (!shorthand.length) {
-      set(this, 'data._schema', []);
-      return;
-    }
+    if (!shorthand.length) return;
+
     const parsedSchemaFields = 
       shorthand.split(",").map(tuple => tuple.split(":").map(t => t.trim()));
     const existingSchema = get(this, 'data._schema') || [];
@@ -143,8 +141,7 @@ export default Service.extend({
   },
 
   syncFragmentsToSchema() {
-    const { fragments, _schema } = get(this, 'data');
-
+    const { fragments, _schema = [] } = get(this, 'data');
     const syncedFragments = (fragments || []).map(fragment => {
       const syncedFragment = _schema.map(schemaField => {
         const dataForSchemaField = fragment.findBy('_schemaRef', schemaField.uuid);
@@ -165,7 +162,12 @@ export default Service.extend({
   addSchemaField() {
     const newField = { key: '', type: null, uuid: generateUUID(), validation: '' };
     set(newField, 'validation', validateSchemaField(newField));
-    get(this, 'data._schema').pushObject(newField);
+    if (get(this, 'data._schema')) {
+      get(this, 'data._schema').pushObject(newField);
+    } else {
+      set(this, 'data._schema', [newField]);
+    }
+    
     return newField;
   },
 
@@ -182,7 +184,10 @@ export default Service.extend({
 
       simpleFragments[uuid] = fragment.reduce((simpleFragment, fragmentField) => {
         if (fragmentField.key === "uuid") return simpleFragment;
-        simpleFragment[fragmentField.key.camelize()] = fragmentField.value;
+        if (fragmentField.key) {
+          simpleFragment[fragmentField.key.camelize()] = fragmentField.value;
+        }
+        
         return {
           index,
           uuid,
