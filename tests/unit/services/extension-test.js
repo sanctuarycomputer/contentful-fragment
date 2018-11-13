@@ -97,7 +97,6 @@ const PARSED_FRAGMENT = [
   { "_schemaRef": "a592f3", "key": "Logo", "type": "Blob", "value": null }
 ];
 
-filterSc
 const filterSchemaRef = fragment => {
   // eslint-disable-next-line no-unused-vars
   return fragment.reduce((memo, { _schemaRef, ...field }) => {
