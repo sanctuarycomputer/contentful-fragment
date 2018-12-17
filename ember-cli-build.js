@@ -9,7 +9,7 @@ module.exports = function(defaults) {
       plugins: ['transform-object-rest-spread']
     },
     fingerprint: {
-      prepend: 'https://rawgit.com/'
+      prepend: 'https://cdn.jsdelivr.net/'
     }
   });
 

@@ -45,7 +45,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/sanctuarycomputer/contentful-fragment/master/dist/';
+    ENV.rootURL = '/gh/sanctuarycomputer/contentful-fragment@master/dist/';
     ENV.routerRootURL = '/index.html';
     // here you can enable a production-specific feature
   }
