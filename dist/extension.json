@@ -1,7 +1,7 @@
 {
   "id": "contentful-fragment",
   "name": "Contentful Fragment",
-  "src": "https://rawgit.com/sanctuarycomputer/contentful-fragment/master/dist/index.html",
+  "src": "https://cdn.jsdelivr.net/gh/sanctuarycomputer/contentful-fragment@master/dist/index.html",
   "fieldTypes": ["Object"],
   "parameters": {
     "instance": [
