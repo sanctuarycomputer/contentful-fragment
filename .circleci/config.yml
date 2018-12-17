@@ -1,0 +1,45 @@
+defaults: &defaults
+    working_directory: ~/contentful-fragment
+    environment:
+        TZ: "/usr/share/zoneinfo/America/New_York"
+    docker:
+        - image: circleci/node:8-browsers
+
+
+version: 2
+jobs:
+    install-dependencies:
+        <<: *defaults
+        steps:
+          - checkout
+          - attach_workspace:
+              at: ~/contentful-fragment
+          - restore_cache:  
+              keys: 
+                  - v1-dependencies-{{ checksum "yarn.lock" }}
+                  - v1-dependencies-
+          - run: yarn install
+          - save_cache:
+              paths:
+                - node_modules
+              key: v1-dependencies-{{ checksum "yarn.lock" }}
+          - persist_to_workspace:
+              root: .
+              paths: 
+                - .
+  
+    run-tests:
+      <<: *defaults
+      steps:
+        - attach_workspace:
+              at: ~/contentful-fragment
+        - run: yarn test
+
+workflows:
+    version: 2
+    build-n-test:
+        jobs:
+          - install-dependencies
+          - run-tests:
+              requires:
+                  - install-dependencies

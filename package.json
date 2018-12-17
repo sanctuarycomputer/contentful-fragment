@@ -15,7 +15,7 @@
     "build-production": "ember build --environment=production",
     "lint:js": "eslint .",
     "start": "ember serve",
-    "test": "ember test"
+    "test": "ember test --skip-autolaunch"
   },
   "husky": {
     "hooks" :{
