@@ -210,6 +210,17 @@ export default Service.extend({
     }
   },
 
+  updateSort(order) {
+    const fragments = get(this, 'data.fragments');
+    const resorted = order.map(uuid => fragments.find(fragment => {
+      const fragmentUuid = get(fragment.findBy('key', 'uuid'), 'value');
+      return uuid === fragmentUuid
+    }));
+
+    set(this, 'data.fragments', resorted);
+    this.persist();
+  },
+
   persist() {
     this.makeSimpleFragments();
     this.generateJSONPreview();

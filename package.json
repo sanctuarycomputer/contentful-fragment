@@ -18,15 +18,15 @@
     "test": "ember test --skip-autolaunch"
   },
   "husky": {
-    "hooks" :{
-      "pre-commit": "yarn build-production && git add dist",
-      "pre-push": "yarn test && yarn lint:js"
+    "hooks": {
+      "pre-commit": "yarn test && yarn lint:js && yarn build-production && git add dist"
     }
   },
   "devDependencies": {
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "broccoli-asset-rev": "^2.7.0",
     "ember-ajax": "^3.0.0",
+    "ember-auto-import": "^1.2.13",
     "ember-cli": "~3.3.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.6.0",
@@ -42,7 +42,7 @@
     "ember-cli-eslint": "^4.2.1",
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-htmlbars-inline-precompile": "^1.0.0",
-    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-inject-live-reload": "^2.0.1",
     "ember-cli-moment-shim": "^3.7.1",
     "ember-cli-qunit": "^4.3.2",
     "ember-cli-shims": "^1.2.0",
@@ -60,8 +60,10 @@
     "ember-source": "~3.3.0",
     "ember-truth-helpers": "^2.1.0",
     "eslint-plugin-ember": "^5.0.0",
+    "hammerjs": "^2.0.8",
     "husky": "^1.1.2",
     "loader.js": "^4.2.3",
+    "muuri": "^0.7.1",
     "qunit-dom": "^0.6.2"
   },
   "engines": {

@@ -1,180 +1,171 @@
 {{#if extension.data._schema}}
-  {{#each extension.data.fragments as |fragment|}}
-    <div class='cf-card mb1'>
-      <div class='cf-card-inner'>
-        <div class='clearfix'>
-
-            {{#with (get (find-by 'key' 'uuid' fragment) 'value') as |uuid|}}
-              {{#if (eq editingUUID uuid)}}
-                <div class='col-11 left pr1'>
-                  {{#each fragment as |fragmentField|}}
-                    {{#if (not-eq fragmentField.key 'uuid')}}
-                      <div class='cf-form-field'>
-                        <label>
-                          {{fragmentField.key}}
-                          {{#if (eq fragmentField.type 'Symbol')}}
-                            {{input value=fragmentField.value class='cf-form-input' key-up="save"}}
-                          {{/if}}
-                          {{#if (eq fragmentField.type 'Date')}}
-                            {{pikaday-input 
-                              class='cf-form-input' 
-                              format="dddd, Do MMMM YYYY"
-                              useUTC=true 
-                              value=fragmentField.value 
-                              onSelection=(action "saveDate" fragmentField)
-                              position='bottom left'
-                              reposition=false
-                            }}
-                          {{/if}}
-                          {{#if (eq fragmentField.type 'Blob')}}
-                            {{#file-upload name=fragmentField.key
-                                           onfileadd=(action "saveBlob" fragmentField) as |queue|}}
-                              <a class="button">
-                                {{#if queue.files.length}}
-                                  Uploading...
-                                {{else}}
-                                  {{if fragmentField.value 'Replace File' 'Upload File'}}
-                                {{/if}}
-                              </a>
-                            {{/file-upload}}
-                            {{#if fragmentField.value}}
-                              <div class="blob-preview cf-card my1">
-                                <div class="cf-card-inner flex items-center">
-                                  {{#if (is-image-type fragmentField.value.type)}}
-                                    <img src="{{fragmentField.value.data}}" />
-                                  {{else}}
-                                    <div class="blob-no-preview flex items-center p1">
-                                      <p class="cf-card-status">No Preview Available</p>
-                                    </div>
-                                  {{/if}}
-                                  <div class="blob-meta ml1">
-                                    <p>File Name: {{fragmentField.value.name}}</p>
-                                    <p>File Size: {{fragmentField.value.size}}</p>
-                                    <p>File Type: {{fragmentField.value.type}}</p>
-                                  </div>
-                                </div>
-                              </div>
-                            {{/if}}
-                          {{/if}}
-                        </label> 
-                      </div>
-                    {{/if}}
-                  {{/each}}
-                  <a {{action 'removeFragment' fragment}}>
-                    <div class='icon-wrapper'>
-                      <svg class='icon-small' width="12" height="12" viewBox="-1 -1 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <g fill="currentColor">
-                          <path d="M4.846 7l-3.77-3.77L0 2.155 2.154 0 3.23 1.077 7 4.847l3.77-3.77L11.845 0 14 2.154 12.923 3.23 9.153 7l3.77 3.77L14 11.845 11.846 14l-1.077-1.077L7 9.153l-3.77 3.77L2.155 14 0 11.846l1.077-1.077z">
-                          </path>
-                        </g>
-                      </svg>
-                    </div>
-                    Delete Entry
-                  </a>
-                </div>
-                <div class='col-1 left pr1 right-align'>
-                  <div class='icon-wrapper' {{action 'cancelEditing'}}>
-                    <svg class='icon-small' width="14" height="14" viewBox="-1 -1 16 16" xmlns="http://www.w3.org/2000/svg">
-                      <g fill="currentColor">
-                        <path d="M4.846 7l-3.77-3.77L0 2.155 2.154 0 3.23 1.077 7 4.847l3.77-3.77L11.845 0 14 2.154 12.923 3.23 9.153 7l3.77 3.77L14 11.845 11.846 14l-1.077-1.077L7 9.153l-3.77 3.77L2.155 14 0 11.846l1.077-1.077z">
-                        </path>
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              {{else}}
-                <div class='col-11 left pr1 overflow-hidden'>
-                  {{#each fragment as |fragmentField|}}
-                    {{#if (not-eq fragmentField.key 'uuid')}}
-                      
+  {{#muuri-grid-component updateSort=(action 'updateSort')}}
+    {{#each extension.data.fragments as |fragment index|}}
+      {{#with (get (find-by 'key' 'uuid' fragment) 'value') as |uuid|}}
+        {{#muuri-item-component uuid=uuid}}
+          {{!-- card content --}}
+          <div class='col-11 left pr1 overflow-hidden'>
+            {{#each fragment as |fragmentField|}}
+              {{#if (not-eq fragmentField.key 'uuid')}}
+                <div class="cf-form-field">
+                  {{#if (eq editingUUID uuid)}}
+                    <label>
+                      {{fragmentField.key}}
                       {{#if (eq fragmentField.type 'Symbol')}}
-                        <p class='my1 cf-card-field'>{{fragmentField.key}}: {{fragmentField.value}}</p>
+                        {{input value=fragmentField.value class='cf-form-input' key-up=(action 'save')}}
                       {{/if}}
                       {{#if (eq fragmentField.type 'Date')}}
-                        <p class='my1 cf-card-field'>
-                          {{fragmentField.key}}: {{if fragmentField.value (moment-format fragmentField.value 'dddd, Do MMMM YYYY')}}
-                        </p>
+                        {{pikaday-input
+                          class='cf-form-input'
+                          format="dddd, Do MMMM YYYY"
+                          useUTC=true
+                          value=fragmentField.value
+                          onSelection=(action 'saveDate' fragmentField)
+                          position='bottom left'
+                          reposition=false
+                        }}
                       {{/if}}
                       {{#if (eq fragmentField.type 'Blob')}}
-                        <p class='my1 cf-card-field'>
-                          {{fragmentField.key}}:
-                        </p>
+                        {{#file-upload
+                          name=fragmentField.key
+                          onfileadd=(action 'saveBlob' fragmentField) as |queue|
+                        }}
+                          <a class="button">
+                            {{#if queue.files.length}}
+                              Uploading...
+                            {{else}}
+                              {{if fragmentField.value 'Replace File' 'Upload File'}}
+                            {{/if}}
+                          </a>
+                        {{/file-upload}}
                         {{#if fragmentField.value}}
-                          <div class="blob-preview cf-card mb1">
-                            <div class="cf-card-inner flex items-center">
-                              {{#if (is-image-type fragmentField.value.type)}}
-                                <img src="{{fragmentField.value.data}}" />
-                              {{else}}
-                                <div class="blob-no-preview flex items-center p1">
-                                  <p class="cf-card-status">No Preview Available</p>
-                                </div>
-                              {{/if}}
-                              <div class="blob-meta ml1">
-                                <p>File Name: {{fragmentField.value.name}}</p>
-                                <p>File Size: {{fragmentField.value.size}}</p>
-                                <p>File Type: {{fragmentField.value.type}}</p>
+                        <div class="blob-preview cf-card my1">
+                          <div class="cf-card-inner flex items-center">
+                            {{#if (is-image-type fragmentField.value.type)}}
+                              <img src="{{fragmentField.value.data}}" />
+                            {{else}}
+                              <div class="blob-no-preview flex items-center p1">
+                                <p class="cf-card-status">No Preview Available</p>
                               </div>
+                            {{/if}}
+                            <div class="blob-meta ml1">
+                              <p>File Name: {{fragmentField.value.name}}</p>
+                              <p>File Size: {{fragmentField.value.size}}</p>
+                              <p>File Type: {{fragmentField.value.type}}</p>
                             </div>
                           </div>
+                        </div>
                         {{/if}}
                       {{/if}}
-
+                    </label>
+                  {{else}}
+                    {{#if (eq fragmentField.type 'Symbol')}}
+                      <p class='my1 cf-card-field'>
+                        {{fragmentField.key}}: {{fragmentField.value}}
+                      </p>
                     {{/if}}
-                  {{/each}}
-                </div>
-                <div class='col-1 left pr1 right-align'>
-                  <div class='icon-wrapper' {{action 'editFragment' uuid}}>
-                    <svg width="17" height="16" viewBox="-1 -1 19 18" xmlns="http://www.w3.org/2000/svg">
-                      <g fill="currentColor">
-                        <path d="M9.702 2.567L.964 11.306 0 16l4.776-.882 8.739-8.738-3.813-3.813zm-7.754 9.715l7.76-7.759.48.48-7.76 7.76-.48-.48zm1.841 1.853l-.48-.48 7.76-7.76.48.48-7.76 7.76zM14.37 5.526l-3.814-3.813L12.27 0l3.813 3.813z">
-                        </path>
-                      </g>
-                    </svg>
-                  </div>
+
+                    {{#if (eq fragmentField.type 'Date')}}
+                      <p class='my1 cf-card-field'>
+                        {{fragmentField.key}}: {{if fragmentField.value (moment-format fragmentField.value 'dddd, Do MMMM YYYY')}}
+                      </p>
+                    {{/if}}
+
+                    {{#if (eq fragmentField.type 'Blob')}}
+                      <p class='my1 cf-card-field'>
+                        {{fragmentField.key}}:
+                      </p>
+                      {{#if fragmentField.value}}
+                        <div class="blob-preview cf-card mb1">
+                          <div class="cf-card-inner flex items-center">
+                            {{#if (is-image-type fragmentField.value.type)}}
+                              <img src="{{fragmentField.value.data}}" />
+                            {{else}}
+                            <div class="blob-no-preview flex items-center p1">
+                              <p class="cf-card-status">No Preview Available</p>
+                            </div>
+                            {{/if}}
+                            <div class="blob-meta ml1">
+                              <p>File Name: {{fragmentField.value.name}}</p>
+                              <p>File Size: {{fragmentField.value.size}}</p>
+                              <p>File Type: {{fragmentField.value.type}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      {{/if}}
+                    {{/if}}
+                  {{/if}}
                 </div>
               {{/if}}
+            {{/each}}
+          </div>
 
-            {{/with}}
-
-        </div>
-      </div>
-    </div>
-  {{else}}
-    <p class='mb3'>Hey! You haven't added any entries yet. <a {{action 'addFragment'}}>Add one now!</a></p>
-  {{/each}}
-
+          {{!-- edit or cancel button --}}
+          <div class='col-1 left pr1 right-align'>
+            {{#if (eq editingUUID uuid)}}
+              <div class='icon-wrapper' {{action 'cancelEditing'}}>
+                <svg class='icon-small' width="14" height="14" viewBox="-1 -1 16 16" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="currentColor">
+                    <path d="M4.846 7l-3.77-3.77L0 2.155 2.154 0 3.23 1.077 7 4.847l3.77-3.77L11.845 0 14 2.154 12.923 3.23 9.153 7l3.77 3.77L14 11.845 11.846 14l-1.077-1.077L7 9.153l-3.77 3.77L2.155 14 0 11.846l1.077-1.077z">
+                    </path>
+                  </g>
+                </svg>
+              </div>
+            {{else}}
+              <div class='icon-wrapper' {{action 'editFragment' uuid}}>
+                <svg width="17" height="16" viewBox="-1 -1 19 18" xmlns="http://www.w3.org/2000/svg">
+                  <g fill="currentColor">
+                    <path d="M9.702 2.567L.964 11.306 0 16l4.776-.882 8.739-8.738-3.813-3.813zm-7.754 9.715l7.76-7.759.48.48-7.76 7.76-.48-.48zm1.841 1.853l-.48-.48 7.76-7.76.48.48-7.76 7.76zM14.37 5.526l-3.814-3.813L12.27 0l3.813 3.813z">
+                    </path>
+                  </g>
+                </svg>
+              </div>
+            {{/if}}
+          </div>
+        {{/muuri-item-component}}
+      {{/with}}
+    {{else}}
+      <p class='mb3'>
+        Hey! You haven't added any entries yet.
+        <a {{action 'addFragment'}}>Add one now!</a>
+      </p>
+    {{/each}}
+  {{/muuri-grid-component}}
+  {{!-- Add / Edit buttons --}}
   <div class='clearfix mt2 pb2'>
     <a {{action 'addFragment'}}>
       <div class='icon-wrapper'>
         <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path><path d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+          <path d="M0 0h24v24H0z" fill="none"></path>
         </svg>
       </div>
       Add Entry
     </a>
-
     {{#unless extension.data._settings.usesPredefinedSchema}}
       {{#link-to 'schema' class='ml2'}}
         <div class='icon-wrapper'>
           <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path><path d="M0 0h24v24H0z" fill="none"></path>
+            <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
           </svg>
         </div>
         Edit Fragment
       {{/link-to}}
     {{/unless}}
 
-  </div>
-
-  <div>
-    {{#if showPreview}}
-    <a {{action 'hidePreview' }}>[ show/hide JSON preview ]</a><br/>
-    <textarea class="json-preview" value={{extension.preview}} disabled="true" />
-    {{else}}
-    <a {{action 'showPreview' }}>[ show/hide JSON preview ]</a>
-    {{/if}}
+    {{!-- JSON Preview --}}
+    <div>
+      {{#if showPreview}}
+        <a {{action 'hidePreview' }}>[ show/hide JSON preview ]</a><br/>
+        <textarea class="json-preview" value={{extension.preview}} disabled="true" />
+      {{else}}
+        <a {{action 'showPreview' }}>[ show/hide JSON preview ]</a>
+      {{/if}}
+    </div>
   </div>
 {{else}}
+  {{!-- Fragment is not yet set up --}}
   <p>
     Please define your Fragment before adding content. You can do this in the UI below, or with a
     <a href="https://github.com/sanctuarycomputer/contentful-fragment" target="_blank">predefined schema.</a>
@@ -182,7 +173,8 @@
   {{#link-to 'schema'}}
     <div class='icon-wrapper'>
       <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path><path d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+        <path d="M0 0h24v24H0z" fill="none"></path>
       </svg>
     </div>
     Setup Fragment
