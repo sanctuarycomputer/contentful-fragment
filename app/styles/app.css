@@ -137,6 +137,7 @@ hr {
 
 .cf-card {
   display: flex;
+  transition: all 200ms ease-in-out;
 }
 .cf-card-icon {
   display: flex;
@@ -161,20 +162,19 @@ hr {
   position: absolute;
   width: 100%;
   z-index: 1;
-  transition: all 200ms ease-in-out;
 }
-.muuri-item-component:hover {
+.muuri-item-component--editing {
+  z-index: 4;
+}
+.item-content > .cf-card:hover {
   transform: translate3d(0, -2px, 0);
   box-shadow: 0 6px 3px -3px rgba(0,0,0,0.1);
 }
-.muuri-item-dragging {
+.muuri-item-component--editing .item-content > .cf-card {
+  box-shadow: 0px 6px 12px -3px rgba(0,0,0,0.3);
+}
+.muuri-item-dragging, .muuri-item-releasing {
   z-index: 3;
-}
-.muuri-item-releasing {
-  z-index: 2;
-}
-.muuri-item-hidden {
-  z-index: 0;
 }
 .item-content {
   position: relative;

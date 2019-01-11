@@ -14,7 +14,10 @@ export default Controller.extend({
       const newFragment = get(this, 'extension').addFragment();
       if (!newFragment) return;
       const uuid = get(newFragment.findBy('key', 'uuid'), 'value');
-      set(this, 'editingUUID', uuid);
+      // TODO: re-enable this after muuri rerender on "iEditing"
+      // bug is fixed
+      // set(this, 'editingUUID', uuid);
+      return uuid;
     },
 
     editFragment(uuid) {
