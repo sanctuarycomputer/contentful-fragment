@@ -70,7 +70,7 @@
 
                     {{#if (eq fragmentField.type 'Date')}}
                       <p class='my1 cf-card-field'>
-                        {{fragmentField.key}}: {{if fragmentField.value (moment-format fragmentField.value 'dddd, Do MMMM YYYY')}}
+                        {{fragmentField.key}}: {{if fragmentField.value (moment-format (utc fragmentField.value) 'dddd, Do MMMM YYYY')}}
                       </p>
                     {{/if}}
 
