@@ -137,6 +137,18 @@ hr {
   max-width: 20rem;
 }
 
+.cf-card-field--title {
+  margin-bottom: .5rem;
+  color: #8091a5;
+  font-size: 0.875rem;
+  max-width: 50rem;
+}
+
+.cf-card-field--content {
+  margin-top: .5rem;
+  font-size: 1rem;
+}
+
 .pika-single {
   font-family: "Avenir Next W01", Helvetica, sans-serif;
   text-rendering: optimizeLegibility;
@@ -179,7 +191,7 @@ hr {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: .875rem;
+  width: 1.25rem;
   border-right: 1px solid #d3dce0;
   background-color: #f7f9fa;
   cursor: grab;
@@ -188,6 +200,15 @@ hr {
 .cf-card-icon:hover {
   background-color: #e5ebed;
 }
+
+.cf-form-field {
+  margin-bottom: 1rem !important;
+}
+
+.cf-form-field:last-of-type {
+  margin-bottom: 2rem !important;
+}
+
 .muuri-grid-component {
   position: relative;
   display: flex;

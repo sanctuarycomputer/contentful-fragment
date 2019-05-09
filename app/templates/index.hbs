@@ -63,20 +63,26 @@
                     </label>
                   {{else}}
                     {{#if (eq fragmentField.type 'Symbol')}}
-                      <p class='my1 cf-card-field'>
-                        {{fragmentField.key}}: {{fragmentField.value}}
+                      <p class='cf-card-field cf-card-field--title'>
+                        {{fragmentField.key}}
+                      </p>
+                      <p class='cf-card-field cf-card-field--content'>
+                        {{fragmentField.value}}
                       </p>
                     {{/if}}
 
                     {{#if (eq fragmentField.type 'Date')}}
-                      <p class='my1 cf-card-field'>
-                        {{fragmentField.key}}: {{if fragmentField.value (moment-format (utc fragmentField.value) 'dddd, Do MMMM YYYY')}}
+                      <p class='cf-card-field cf-card-field--title'>
+                        {{fragmentField.key}}
+                      </p>
+                      <p class='cf-card-field cf-card-field--content'>
+                        {{if fragmentField.value (moment-format (utc fragmentField.value) 'dddd, Do MMMM YYYY')}}
                       </p>
                     {{/if}}
 
                     {{#if (eq fragmentField.type 'Blob')}}
-                      <p class='my1 cf-card-field'>
-                        {{fragmentField.key}}:
+                      <p class='cf-card-field cf-card-field--title'>
+                        {{fragmentField.key}}
                       </p>
                       {{#if fragmentField.value}}
                         <div class="blob-preview cf-card mb1">
