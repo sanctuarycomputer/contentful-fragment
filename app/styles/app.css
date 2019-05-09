@@ -136,18 +136,20 @@ hr {
 .cf-card-field {
   text-overflow: ellipsis;
   max-width: 20rem;
+  margin-bottom: .5rem;
 }
 
 .cf-card-field--title {
-  margin-bottom: .5rem;
+  margin-bottom: 0rem;
   color: #8091a5;
   font-size: 0.875rem;
   max-width: 50rem;
 }
 
 .cf-card-field--content {
-  margin-top: .5rem;
+  margin-top: 0rem;
   font-size: 1rem;
+  color: black;
 }
 
 .pika-single {
@@ -225,8 +227,7 @@ hr {
   z-index: 4;
 }
 .item-content > .cf-card:hover {
-  transform: translate3d(0, -2px, 0);
-  box-shadow: 0 6px 3px -3px rgba(0,0,0,0.1);
+  border: solid #3c80cf 1px;
 }
 .muuri-item-component--editing .item-content > .cf-card {
   box-shadow: 0px 6px 12px -3px rgba(0,0,0,0.3);

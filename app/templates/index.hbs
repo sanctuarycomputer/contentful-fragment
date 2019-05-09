@@ -10,7 +10,7 @@
           <div class='col-11 left pr1 overflow-hidden'>
             {{#each fragment as |fragmentField|}}
               {{#if (not-eq fragmentField.key 'uuid')}}
-                <div class="cf-form-field">
+                <div class="cf-form-field cf-card-field--title">
                   {{#if (eq editingUUID uuid)}}
                     <label>
                       {{fragmentField.key}}
@@ -63,25 +63,25 @@
                     </label>
                   {{else}}
                     {{#if (eq fragmentField.type 'Symbol')}}
-                      <p class='cf-card-field cf-card-field--title'>
+                      <p class='cf-card-field'>
                         {{fragmentField.key}}
                       </p>
-                      <p class='cf-card-field cf-card-field--content'>
+                      <p class='cf-card-field cf-card-field--content {{if fragmentField.value '' 'my3'}}'>
                         {{fragmentField.value}}
                       </p>
                     {{/if}}
 
                     {{#if (eq fragmentField.type 'Date')}}
-                      <p class='cf-card-field cf-card-field--title'>
+                      <p class='cf-card-field'>
                         {{fragmentField.key}}
                       </p>
-                      <p class='cf-card-field cf-card-field--content'>
+                      <p class='cf-card-field cf-card-field--content {{if fragmentField.value '' 'my3'}}'>
                         {{if fragmentField.value (moment-format (utc fragmentField.value) 'dddd, Do MMMM YYYY')}}
                       </p>
                     {{/if}}
 
                     {{#if (eq fragmentField.type 'Blob')}}
-                      <p class='cf-card-field cf-card-field--title'>
+                      <p class='cf-card-field'>
                         {{fragmentField.key}}
                       </p>
                       {{#if fragmentField.value}}
@@ -101,6 +101,8 @@
                             </div>
                           </div>
                         </div>
+                        {{else}}
+                        <div class='my3'/>
                       {{/if}}
                     {{/if}}
                   {{/if}}
