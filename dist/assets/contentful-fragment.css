@@ -124,15 +124,15 @@ hr {
 
 .json-preview {
   height: 200px;
-  border: 1px solid #d3dce0;
+  border: 1px solid #c3d0d5;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #efefef;
+  background-color: #f7f9fa;
   overflow: scroll;
   width: 100%;
   font-family: monospace;
   font-size: .75rem;
-  line-height:1.2;
+  line-height: 1rem;
 }
 
 .cf-card {

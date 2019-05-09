@@ -175,7 +175,7 @@
     <div>
       {{#if showPreview}}
         <a {{action 'hidePreview' }}>[ show/hide JSON preview ]</a><br/>
-        <textarea class="json-preview" value={{extension.preview}} disabled="true" />
+        <textarea class="json-preview mt2 p2" value={{extension.preview}} disabled="true" />
       {{else}}
         <a {{action 'showPreview' }}>[ show/hide JSON preview ]</a>
       {{/if}}
