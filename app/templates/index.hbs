@@ -149,7 +149,7 @@
     {{/each}}
   {{/muuri-grid-component}}
   {{!-- Add / Edit buttons --}}
-  <div class='clearfix pb2 {{if extension.data.fragments 'mt2' 'mt4'}}'>
+  <div class='clearfix pb2 flex {{if extension.data.fragments 'mt2' 'mt4'}}'>
     <a {{action 'addFragment'}}>
       <div class='icon-wrapper'>
         <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
@@ -172,15 +172,35 @@
     {{/unless}}
 
     {{!-- JSON Preview --}}
-    <div>
+    <div class="ml2">
       {{#if showPreview}}
-        <a {{action 'hidePreview' }}>[ show/hide JSON preview ]</a><br/>
-        <textarea class="json-preview mt2 p2" value={{extension.preview}} disabled="true" />
+        <a {{action 'hidePreview' }}>
+          <div class='icon-wrapper'>
+            <svg class='icon-small' width="12" height="12" viewBox="-1 -1 16 16" xmlns="http://www.w3.org/2000/svg">
+              <g fill="currentColor">
+                <path d="M4.846 7l-3.77-3.77L0 2.155 2.154 0 3.23 1.077 7 4.847l3.77-3.77L11.845 0 14 2.154 12.923 3.23 9.153 7l3.77 3.77L14 11.845 11.846 14l-1.077-1.077L7 9.153l-3.77 3.77L2.155 14 0 11.846l1.077-1.077z">
+                </path>
+              </g>
+            </svg>
+          </div>
+          Hide JSON Preview
+        </a><br/>
       {{else}}
-        <a {{action 'showPreview' }}>[ show/hide JSON preview ]</a>
+        <a {{action 'showPreview' }}>
+          <div class='icon-wrapper'>
+            <svg class='icon-small' height="18" viewBox="0 0 24 24" width="18" xmlns="http://www.w3.org/2000/svg">
+              <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"></path>
+              <path d="M0 0h24v24H0z" fill="none"></path>
+            </svg>
+          </div>
+          Show JSON Preview
+        </a>
       {{/if}}
     </div>
   </div>
+  {{#if showPreview}}
+      <textarea class="json-preview mt2 p2" value={{extension.preview}} disabled="true" />
+    {{/if}}
 {{else}}
   {{!-- Fragment is not yet set up --}}
   <p>
