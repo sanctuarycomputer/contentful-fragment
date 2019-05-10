@@ -18,6 +18,14 @@ body {
   cursor: pointer;
 }
 
+.events-none {
+  pointer-events: none;
+}
+
+.events-all {
+  pointer-events: all;
+}
+
 .icon-wrapper {
   display: inline-block;
 }
