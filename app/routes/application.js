@@ -2,14 +2,8 @@ import Route from '@ember/routing/route';
 import { get } from '@ember/object';
 import { inject as service } from '@ember/service';
 
-const DEV = false;
 const DUMMY_DATA = {
   "_schema": [
-    {
-      "key": "Event Name",
-      "type": "Symbol",
-      "uuid": "32d705"
-    },
     {
       "key": "Event Location",
       "type": "Symbol",
@@ -38,12 +32,6 @@ const DUMMY_DATA = {
         "value": "c36d6d"
       },
       {
-        "key": "Event Name",
-        "value": "Halloween Party",
-        "type": "Symbol",
-        "_schemaRef": "32d705"
-      },
-      {
         "key": "Event Location",
         "value": "Sanctuary Computer Inc",
         "type": "Symbol",
@@ -57,7 +45,7 @@ const DUMMY_DATA = {
       },
       {
         "key": "Event Date",
-        "value": null,
+        "value": new Date().setDate(new Date().getDate() + 1),
         "type": "Date",
         "_schemaRef": "a592h9"
       },
@@ -77,12 +65,6 @@ const DUMMY_DATA = {
       {
         "key": "uuid",
         "value": "0e4b5a"
-      },
-      {
-        "key": "Event Name",
-        "value": "Rooftop Drinks",
-        "type": "Symbol",
-        "_schemaRef": "32d705"
       },
       {
         "key": "Event Location",
@@ -129,10 +111,10 @@ export default Route.extend({
   extension: service(),
 
   model() {
-    if (DEV) {
-      return DummyExtension;
-    }
-    return new Promise(window.contentfulFragment.getExtension);
+    const isDummy = ['localhost', 'contentful-fragment.now.sh'].includes(window.location.hostname);
+    if (isDummy) return DummyExtension;
+
+    return new Promise(window.contentfulFragment.getExtension, DummyExtension);
   },
 
   afterModel(contentfulExtension) {
