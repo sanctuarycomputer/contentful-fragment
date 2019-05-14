@@ -31,9 +31,15 @@ export default Component.extend({
     for (var i = 0; i < currentGridElements.length; i++) {
       const itemEl = currentGridElements[i];
       const uuid = itemEl.getAttribute('data-id');
+
+      if (!!prevItems[i] && itemEl.clientHeight !== prevItems[i]._height) {
+        grid.refreshItems().layout()
+      }
+
       if (!prevItemIds.includes(uuid)) {
         grid.add(itemEl);
       }
+
       currentItemIds.push(uuid);
     }
 
