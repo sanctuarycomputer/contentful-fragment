@@ -10,6 +10,14 @@ body {
   color: #fe5c60;
 }
 
+.transition {
+  transition: all .1s ease-in-out;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
 .icon-wrapper {
   display: inline-block;
 }
@@ -41,6 +49,26 @@ a:hover .icon-small {
 
 .icon-small.red {
   fill: #fe5c60;
+}
+
+.plus-icon {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.cross-icon {
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.check-icon {
+  width: 0.875rem;
+  height: 0.875rem;
+}
+
+.pencil-icon {
+  width: 1.0625rem;
+  height: 1rem;
 }
 
 .red {
@@ -124,15 +152,15 @@ hr {
 
 .json-preview {
   height: 200px;
-  border: 1px solid #d3dce0;
+  border: 1px solid #c3d0d5;
   -webkit-border-radius: 2px;
   border-radius: 2px;
-  background-color: #efefef;
+  background-color: #f7f9fa;
   overflow: scroll;
   width: 100%;
   font-family: monospace;
   font-size: .75rem;
-  line-height:1.2;
+  line-height: 1rem;
 }
 
 .cf-card {
@@ -178,4 +206,8 @@ hr {
 }
 .item-content {
   position: relative;
+}
+
+.border {
+  border: solid red;
 }
