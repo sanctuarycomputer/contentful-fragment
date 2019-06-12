@@ -112,8 +112,7 @@ export default Route.extend({
 
   model() {
     const isDummy = ['localhost', 'contentful-fragment.now.sh'].includes(window.location.hostname);
-    // if (isDummy) return DummyExtension;
-    console.log('[contentful-fragment]', window.location.hostname, isDummy ? 'demo mode' : 'standard mode'); // eslint-disable-line
+    if (isDummy) return DummyExtension;
 
     return new Promise(window.contentfulFragment.getExtension, DummyExtension);
   },
