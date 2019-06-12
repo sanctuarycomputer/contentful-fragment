@@ -111,7 +111,7 @@ export default Route.extend({
   extension: service(),
 
   model() {
-    const isDummy = ['localhost', 'contentful-fragment.now.sh'].includes(window.location.hostname);
+    const isDummy = ['localhost', 'contentful-fragment.io'].includes(window.location.hostname);
     if (isDummy) return DummyExtension;
 
     return new Promise(window.contentfulFragment.getExtension, DummyExtension);
