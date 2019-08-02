@@ -88,10 +88,12 @@ const DUMMY_DATA = {
   ]
 };
 
+const DUMMY_SCHEMA_SHORTHAND = null; //"Event Location:Symbol,Event Url: Symbol,Event Date:Date,Logo:Blob"
+
 const DummyExtension = {
   parameters: {
     instance: {
-      schemaShorthand: "Event Location:Symbol,Event Url: Symbol,Event Date:Date,Logo:Blob"
+      schemaShorthand: DUMMY_SCHEMA_SHORTHAND
     }
   },
   field: {
