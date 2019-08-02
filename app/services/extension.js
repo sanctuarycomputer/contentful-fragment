@@ -65,6 +65,7 @@ export default Service.extend({
   setup(extension) {
     set(this, 'data', extension.field.getValue() || {});
     set(this, 'extension', extension);
+
     this.loadSchemaFromShorthand();
     this.syncFragmentsToSchema();
     this.makeSimpleFragments();
@@ -109,6 +110,7 @@ export default Service.extend({
 
     this.setSetting('usesPredefinedSchema', true);
     set(this, 'data._schema', loadedSchema);
+    this.validateSchema();
   },
 
   /* Main Editor */
@@ -135,9 +137,14 @@ export default Service.extend({
 
   /* Schema Editor */
   validateSchema() {
-    get(this, 'data._schema').forEach(schemaField => {
-      set(schemaField, 'validation', validateSchemaField(schemaField));
-    });
+    const allValid = get(this, 'data._schema').map(schemaField => {
+      const validation = validateSchemaField(schemaField);
+      set(schemaField, 'validation', validation);
+
+      return (validation.length === 0)
+    }).every(Boolean);
+
+    set(this, 'data.valid', allValid);
   },
 
   syncFragmentsToSchema() {
