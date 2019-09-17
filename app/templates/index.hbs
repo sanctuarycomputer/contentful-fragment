@@ -122,11 +122,13 @@
           <div class="col-1 left pr1 right-align">
             {{#if (eq editingUUID uuid)}}
               <div class="icon-wrapper pointer" {{action 'cancelEditing'}}>
-                <img class="check-icon icon-small" src="check-icon.svg" />
+                {{#check-icon}}
+                {{/check-icon}}
               </div>
             {{else}}
               <div class="icon-wrapper pointer" {{action 'editFragment' uuid}}>
-                <img class="pencil-icon icon-small" src="pencil-icon.svg" />
+                {{#pencil-icon}}
+                {{/pencil-icon}}
               </div>
             {{/if}}
           </div>
