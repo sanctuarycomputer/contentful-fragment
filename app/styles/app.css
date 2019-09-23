@@ -150,6 +150,9 @@ hr {
   margin-top: 0rem;
   font-size: 1rem;
   color: black;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .pika-single {

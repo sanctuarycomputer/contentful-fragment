@@ -19,7 +19,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn test && yarn lint:js && yarn build-production && git add dist"
+      "pre-commit": "yarn lint:js && yarn build-production && git add dist"
     }
   },
   "devDependencies": {
