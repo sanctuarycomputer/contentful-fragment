@@ -124,6 +124,7 @@ hr {
   -ms-flex: 1 0 0;
   flex: 1 0 0;
   padding: 14px;
+  max-width: calc(100% - 19px);
 }
 
 .cf-card-status {
